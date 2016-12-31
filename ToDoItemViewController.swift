@@ -131,6 +131,7 @@ class ToDoItemViewController: UIViewController,UITextFieldDelegate,UITextViewDel
         }
         alert.showSuccess("Priority", subTitle: "Please choose the priority")
         print("test if upload success 2")
+        print("test if upload success 3")
     }
     
     
