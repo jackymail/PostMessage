@@ -327,7 +327,7 @@ class TwitterCloudTableViewController: UITableViewController {
             self.DataBase.delete(withRecordID: recordId, completionHandler: { (recordid, error) in
                 if error == nil
                 {
-                  //  self.tableView.deleteRows(at: [indexPath], with: .fade)
+                   // self.tableView.deleteRows(at: [indexPath], with: .fade)
                     print("fail to delete record is from the database")
                     self.messages.remove(at: indexPath.row)
                 // self.tableView.reloadData()

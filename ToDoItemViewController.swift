@@ -17,27 +17,12 @@ class ToDoItemViewController: UIViewController,UITextFieldDelegate,UITextViewDel
     var taskStatus : Int = 0
     var recordID : CKRecordID?
     var savetype :Int?
-    var task_duration : Int?
+    var task_duration : Int? = 0
     var taskdate : String?
     var task_name : String?
-    {
-        didSet
-        {
-            taskname.text = task_name
-        }
-    
-    
-    }
+
     var task_content :String?
-    {
-        didSet
-        {
-            taskcontent.text = task_content
-        }
-    
-    
-    }
-    
+
     
     @IBOutlet weak var taskname: UITextField!
     
@@ -277,8 +262,22 @@ class ToDoItemViewController: UIViewController,UITextFieldDelegate,UITextViewDel
     
     
     
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        if text == "\n"
+        {
+            self.taskcontent.resignFirstResponder()
+            return false
+        }
+        
+        return true
+    }
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        taskname.text = task_name
+        taskcontent.text = task_content
 
     }
     
