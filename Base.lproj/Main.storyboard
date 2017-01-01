@@ -25,7 +25,7 @@
                                 <rect key="frame" x="0.0" y="28" width="320" height="198"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hUX-iT-Cl2" id="NLY-6x-Jkd">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="197"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="197.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="tvS-zC-iqS">
@@ -102,7 +102,7 @@
                     <navigationItem key="navigationItem" title="OverView" id="G9w-Q5-ELM">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="iht-CP-mlB">
                             <connections>
-                                <segue destination="ba5-wb-eUK" kind="modal" id="TQk-Yi-INX"/>
+                                <segue destination="ba5-wb-eUK" kind="modal" identifier="addTodoItem" id="TQk-Yi-INX"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -140,6 +140,9 @@
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="cfI-7N-MSp" id="er4-N5-DYd"/>
+                                </connections>
                             </textField>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="aRs-9G-Kc9">
                                 <rect key="frame" x="16" y="183" width="296" height="40"/>
@@ -147,6 +150,9 @@
                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <connections>
+                                    <outlet property="delegate" destination="cfI-7N-MSp" id="Rxb-VN-xVg"/>
+                                </connections>
                             </textView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BRS-e5-nMy">
                                 <rect key="frame" x="32" y="384" width="50" height="30"/>
@@ -258,6 +264,8 @@
                     </navigationItem>
                     <connections>
                         <outlet property="Duration_outlet" destination="dqe-47-5hD" id="rxa-ld-CV1"/>
+                        <outlet property="taskContent" destination="aRs-9G-Kc9" id="l9B-6p-g7q"/>
+                        <outlet property="taskName" destination="2Ij-hJ-fQY" id="V4H-Mv-vAy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rXr-l9-I4e" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -457,7 +465,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="2kf-NC-GpM"/>
+        <segue reference="TQk-Yi-INX"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
 </document>

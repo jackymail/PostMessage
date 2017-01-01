@@ -98,7 +98,6 @@ class TwitterCloudTableViewController: UITableViewController {
                     //self.tableView.reloadData()
                     self.refresh.endRefreshing()
             }
-            
             }
 
         }
@@ -289,17 +288,20 @@ class TwitterCloudTableViewController: UITableViewController {
         {
            // let message = self.messages[(indexpath?.section)!]
             let tdvc = (segue.destination as! UINavigationController).visibleViewController as! ToDoItemViewController
+            tdvc.savetype = 1
+            print("the record type is \(tdvc.savetype)")
             tdvc.recordID = self.messages[(indexpath?.section)!].recordID
            // tdvc.todoitemName = message["content"] as! String?
-           // tdvc.savetype = NSInteger(1)
+            
         
        }
-      //  else if segue.identifier == "addTodoItem"
-        //{
-             //let tdvc = (segue.destination as! UINavigationController).visibleViewController as! ToDoItemViewController
-            //tdvc.savetype = NSInteger(2)
+        else if segue.identifier == "addTodoItem"
+        {
+             let tdvc = (segue.destination as! UINavigationController).visibleViewController as! ToDoItemViewController
+            tdvc.savetype = 2
+            print("the record type is \(tdvc.savetype)")
         
-        //}
+        }
         
     }
     

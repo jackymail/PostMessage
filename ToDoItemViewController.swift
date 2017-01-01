@@ -10,9 +10,6 @@ import UIKit
 import CloudKit
 
 
-
-
-
 class ToDoItemViewController: UIViewController,UITextFieldDelegate,UITextViewDelegate,UIPopoverPresentationControllerDelegate {
     
     var Database = CKContainer.default().publicCloudDatabase
@@ -21,8 +18,15 @@ class ToDoItemViewController: UIViewController,UITextFieldDelegate,UITextViewDel
     var recordID : CKRecordID?
     var savetype :Int?
     var task_duration : Int?
+    var taskdate : String?
+    var task_name : String?
+    var task_content :String?
     
-    @IBOutlet weak var duration: UITextField!
+    
+    
+    @IBOutlet weak var taskName: UITextField!
+    @IBOutlet weak var taskContent: UITextView!
+
     
     func save_priority_to_cloud()
     {
@@ -47,55 +51,12 @@ class ToDoItemViewController: UIViewController,UITextFieldDelegate,UITextViewDel
 
     }
     
-    
-    
-    
-
-    
-    
-    
-    #if false
-    
-    #if false
-    @IBAction func save(_ sender: Any) {
-        
-        
-        print("the save type is \(self.savetype)")
-        
-        if(self.savetype == 1)
-        {
-        
-            Database.fetch(withRecordID: recordID!) { (record, error) in
-            if(error != nil)
-            {
-                print("error is nil")
-            }
-            else
-            {
-              //  record?["content"] = self.taskname.text as CKRecordValue?
-                self.Database.save(record!, completionHandler: { (ckrcord, error) in
-                    if error == nil
-                    {
-                        print("error is nil")
-                    }})
-                
-            }
-            
-            }
-        }
-        else if self.savetype == 2
-        {
-          print("save type is 2")
-        }
-    }    
-    #endif
     func textFieldShouldReturn(_ textField: UITextField) -> Bool
     {
-
+        taskName.resignFirstResponder()
         return true
         
     }
-    #endif
    
     
     @IBAction func Done(_ sender: Any) {
@@ -176,15 +137,24 @@ class ToDoItemViewController: UIViewController,UITextFieldDelegate,UITextViewDel
     
     @IBAction func saveRecord(_ sender: Any) {
         
-        print("save duration to the cloud")
-        Database.fetch(withRecordID: recordID!) { (record, error) in
+        print("saveRecord to the cloud the save type is \(savetype)")
+        
+        if self.savetype == 1
+        {
+            Database.fetch(withRecordID: recordID!) { (record, error) in
             if(error != nil)
             {
                 print("error is nil")
             }
             else
             {
-                record?["duration"] = self.duration.text as CKRecordValue?
+                record?[ToDoItem.taskname] = self.taskName.text as CKRecordValue?
+                record?[ToDoItem.taskcontent] = self.taskContent.text as CKRecordValue
+                record?[ToDoItem.taskpriority] = self.taskPriority as CKRecordValue?
+                record?[ToDoItem.taskduration] = self.task_duration as CKRecordValue?
+                record?[ToDoItem.taskDate] = self.taskdate as CKRecordValue?
+                record?[ToDoItem.taskstatus] = self.taskStatus as CKRecordValue?
+                
                 self.Database.save(record!, completionHandler: { (ckrcord, error) in
                     if error == nil
                     {
@@ -193,10 +163,34 @@ class ToDoItemViewController: UIViewController,UITextFieldDelegate,UITextViewDel
                 
             }
             
+         }
         }
-
+        else if self.savetype == 2
+        {
+            if  self.taskName.text != ""
+            {
+                let newMessage = CKRecord(recordType: "Message")
+                newMessage[ToDoItem.taskname] = self.taskName.text as CKRecordValue?
+                newMessage[ToDoItem.taskcontent] = self.taskContent.text as CKRecordValue
+                newMessage[ToDoItem.taskpriority] = self.taskPriority as CKRecordValue?
+                newMessage[ToDoItem.taskduration] = self.task_duration as CKRecordValue?
+                newMessage[ToDoItem.taskDate] = self.taskdate as CKRecordValue?
+                newMessage[ToDoItem.taskstatus] = self.taskStatus as CKRecordValue?
+                self.Database.save(newMessage, completionHandler: { (record, error) in
+                    if error == nil
+                    {
+                        print("save success\n")
+                    }
+                    else
+                    {
+                        print(error ?? "error")
+                    }
+                    
+                })
+            }
+        }
+ 
     }
-    
 
     @IBAction func Status(_ sender: Any) {
         
