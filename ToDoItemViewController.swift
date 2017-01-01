@@ -20,13 +20,28 @@ class ToDoItemViewController: UIViewController,UITextFieldDelegate,UITextViewDel
     var task_duration : Int?
     var taskdate : String?
     var task_name : String?
+    {
+        didSet
+        {
+            taskname.text = task_name
+        }
+    
+    
+    }
     var task_content :String?
+    {
+        didSet
+        {
+            taskcontent.text = task_content
+        }
     
     
+    }
     
-    @IBOutlet weak var taskName: UITextField!
-    @IBOutlet weak var taskContent: UITextView!
-
+    
+    @IBOutlet weak var taskname: UITextField!
+    
+    @IBOutlet weak var taskcontent: UITextView!
     
     func save_priority_to_cloud()
     {
@@ -53,7 +68,7 @@ class ToDoItemViewController: UIViewController,UITextFieldDelegate,UITextViewDel
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool
     {
-        taskName.resignFirstResponder()
+        taskname.resignFirstResponder()
         return true
         
     }
@@ -80,15 +95,15 @@ class ToDoItemViewController: UIViewController,UITextFieldDelegate,UITextViewDel
         
         alert.addButton("high") { 
             self.taskPriority = 1
-            self.save_priority_to_cloud()
+          //  self.save_priority_to_cloud()
         }
         alert.addButton("middle") { 
             self.taskPriority = 2
-            self.save_priority_to_cloud()
+           // self.save_priority_to_cloud()
         }
         alert.addButton("low") { 
             self.taskPriority = 3
-            self.save_priority_to_cloud()
+         //   self.save_priority_to_cloud()
         }
         alert.showSuccess("Priority", subTitle: "Please choose the priority")
         print("test if upload success 2")
@@ -148,11 +163,15 @@ class ToDoItemViewController: UIViewController,UITextFieldDelegate,UITextViewDel
             }
             else
             {
-                record?[ToDoItem.taskname] = self.taskName.text as CKRecordValue?
-                record?[ToDoItem.taskcontent] = self.taskContent.text as CKRecordValue
+                let dateFormat =  DateFormatter()
+                dateFormat.dateFormat = "MM/dd/yyyy hh-mm-ss"
+                let dateString = dateFormat.string(from:(record?.creationDate)!)
+                
+                record?[ToDoItem.taskname] = self.taskname.text as CKRecordValue?
+                record?[ToDoItem.taskcontent] = self.taskcontent.text as CKRecordValue
                 record?[ToDoItem.taskpriority] = self.taskPriority as CKRecordValue?
                 record?[ToDoItem.taskduration] = self.task_duration as CKRecordValue?
-                record?[ToDoItem.taskDate] = self.taskdate as CKRecordValue?
+                record?[ToDoItem.taskDate] = dateString as CKRecordValue?
                 record?[ToDoItem.taskstatus] = self.taskStatus as CKRecordValue?
                 
                 self.Database.save(record!, completionHandler: { (ckrcord, error) in
@@ -167,14 +186,18 @@ class ToDoItemViewController: UIViewController,UITextFieldDelegate,UITextViewDel
         }
         else if self.savetype == 2
         {
-            if  self.taskName.text != ""
+            if  self.taskname.text != ""
             {
                 let newMessage = CKRecord(recordType: "Message")
-                newMessage[ToDoItem.taskname] = self.taskName.text as CKRecordValue?
-                newMessage[ToDoItem.taskcontent] = self.taskContent.text as CKRecordValue
+                let dateFormat =  DateFormatter()
+                dateFormat.dateFormat = "MM/dd/yyyy hh-mm-ss"
+                let dateString = dateFormat.string(from: NSDate() as Date)
+        
+                newMessage[ToDoItem.taskname] = self.taskname.text as CKRecordValue?
+                newMessage[ToDoItem.taskcontent] = self.taskcontent.text as CKRecordValue
                 newMessage[ToDoItem.taskpriority] = self.taskPriority as CKRecordValue?
                 newMessage[ToDoItem.taskduration] = self.task_duration as CKRecordValue?
-                newMessage[ToDoItem.taskDate] = self.taskdate as CKRecordValue?
+                newMessage[ToDoItem.taskDate] = dateString as CKRecordValue?
                 newMessage[ToDoItem.taskstatus] = self.taskStatus as CKRecordValue?
                 self.Database.save(newMessage, completionHandler: { (record, error) in
                     if error == nil
@@ -206,11 +229,11 @@ class ToDoItemViewController: UIViewController,UITextFieldDelegate,UITextViewDel
         
         status_alertview.addButton("Finished") {
             self.taskStatus  = 1
-            self.save_task_status_to_cloud()
+           // self.save_task_status_to_cloud()
         }
         status_alertview.addButton("Not finished") {
             self.taskStatus = 2
-            self.save_task_status_to_cloud()
+           // self.save_task_status_to_cloud()
         }
         
         status_alertview.showSuccess("Status", subTitle: "Please choose status")

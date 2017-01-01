@@ -25,7 +25,7 @@
                                 <rect key="frame" x="0.0" y="28" width="320" height="198"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hUX-iT-Cl2" id="NLY-6x-Jkd">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="197.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="198"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="tvS-zC-iqS">
@@ -63,37 +63,35 @@
                                             <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                         </textView>
-                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rLl-92-cPn">
-                                            <rect key="frame" x="208" y="159" width="104" height="30"/>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ae1-4r-5ip">
+                                            <rect key="frame" x="244" y="136" width="68" height="53"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="104" id="nOh-gD-GTW"/>
+                                                <constraint firstAttribute="width" constant="68" id="3e5-t1-pKD"/>
                                             </constraints>
-                                            <nil key="textColor"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <textInputTraits key="textInputTraits"/>
-                                        </textField>
+                                        </imageView>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="tvS-zC-iqS" firstAttribute="top" secondItem="rtI-wU-jRw" secondAttribute="top" id="2QA-aK-e3Z"/>
                                         <constraint firstItem="tvS-zC-iqS" firstAttribute="top" secondItem="NLY-6x-Jkd" secondAttribute="top" id="2dg-iU-uJL"/>
+                                        <constraint firstItem="ae1-4r-5ip" firstAttribute="bottom" secondItem="NLY-6x-Jkd" secondAttribute="bottomMargin" id="4Fw-x5-h6I"/>
                                         <constraint firstItem="5n3-to-GUw" firstAttribute="top" secondItem="tvS-zC-iqS" secondAttribute="bottom" constant="15" id="99Y-6P-1LA"/>
                                         <constraint firstItem="rtI-wU-jRw" firstAttribute="leading" secondItem="tvS-zC-iqS" secondAttribute="trailing" constant="8" symbolic="YES" id="GSX-9u-4mR"/>
+                                        <constraint firstItem="ae1-4r-5ip" firstAttribute="trailing" secondItem="5n3-to-GUw" secondAttribute="trailing" id="GyV-dv-Zc7"/>
+                                        <constraint firstItem="ae1-4r-5ip" firstAttribute="top" secondItem="5n3-to-GUw" secondAttribute="bottom" constant="14" id="UJd-gd-QZk"/>
                                         <constraint firstItem="5n3-to-GUw" firstAttribute="trailing" secondItem="rtI-wU-jRw" secondAttribute="trailing" id="UTa-Nb-8KJ"/>
                                         <constraint firstItem="5n3-to-GUw" firstAttribute="leading" secondItem="tvS-zC-iqS" secondAttribute="leading" id="Uct-Ni-WgS"/>
                                         <constraint firstItem="J0Z-sK-IpC" firstAttribute="leading" secondItem="5n3-to-GUw" secondAttribute="leading" id="cOT-uQ-Mvg"/>
-                                        <constraint firstItem="rLl-92-cPn" firstAttribute="trailing" secondItem="5n3-to-GUw" secondAttribute="trailing" id="d5Q-xX-yhF"/>
-                                        <constraint firstItem="rLl-92-cPn" firstAttribute="baseline" secondItem="J0Z-sK-IpC" secondAttribute="baseline" id="jvA-Sh-98i"/>
-                                        <constraint firstItem="rLl-92-cPn" firstAttribute="bottom" secondItem="NLY-6x-Jkd" secondAttribute="bottomMargin" id="peq-YG-DV4"/>
+                                        <constraint firstItem="ae1-4r-5ip" firstAttribute="bottom" secondItem="J0Z-sK-IpC" secondAttribute="bottom" id="dOf-bu-50X"/>
                                         <constraint firstItem="5n3-to-GUw" firstAttribute="trailing" secondItem="NLY-6x-Jkd" secondAttribute="trailingMargin" id="tVf-hL-yiI"/>
                                         <constraint firstItem="tvS-zC-iqS" firstAttribute="leading" secondItem="NLY-6x-Jkd" secondAttribute="leadingMargin" id="y7a-cq-W5W"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="TaskState" destination="rLl-92-cPn" id="R9o-V1-sxq"/>
                                     <outlet property="TaskTitle" destination="5n3-to-GUw" id="8Yj-Bn-8a8"/>
-                                    <outlet property="priorityImageView" destination="tvS-zC-iqS" id="Tfu-jL-MWo"/>
+                                    <outlet property="priorityImageView" destination="tvS-zC-iqS" id="Wmg-L3-CAg"/>
                                     <outlet property="taskDate" destination="rtI-wU-jRw" id="xf8-5c-Edq"/>
                                     <outlet property="taskDuration" destination="J0Z-sK-IpC" id="7PB-gk-dAr"/>
+                                    <outlet property="task_status_image_view" destination="ae1-4r-5ip" id="XSN-he-bcD"/>
                                     <segue destination="ba5-wb-eUK" kind="show" identifier="todoListItem" id="2kf-NC-GpM"/>
                                 </connections>
                             </tableViewCell>
@@ -109,7 +107,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rdh-q9-avT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2096" y="-91"/>
+            <point key="canvasLocation" x="2094.375" y="-91.25"/>
         </scene>
         <!--To Do Item View Controller-->
         <scene sceneID="C4b-5n-dSw">
@@ -141,7 +139,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
-                                    <outlet property="delegate" destination="cfI-7N-MSp" id="er4-N5-DYd"/>
+                                    <outlet property="delegate" destination="cfI-7N-MSp" id="INe-vS-fVf"/>
                                 </connections>
                             </textField>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="aRs-9G-Kc9">
@@ -151,7 +149,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 <connections>
-                                    <outlet property="delegate" destination="cfI-7N-MSp" id="Rxb-VN-xVg"/>
+                                    <outlet property="delegate" destination="cfI-7N-MSp" id="aSw-Ra-RyC"/>
                                 </connections>
                             </textView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BRS-e5-nMy">
@@ -264,8 +262,8 @@
                     </navigationItem>
                     <connections>
                         <outlet property="Duration_outlet" destination="dqe-47-5hD" id="rxa-ld-CV1"/>
-                        <outlet property="taskContent" destination="aRs-9G-Kc9" id="l9B-6p-g7q"/>
-                        <outlet property="taskName" destination="2Ij-hJ-fQY" id="V4H-Mv-vAy"/>
+                        <outlet property="taskcontent" destination="aRs-9G-Kc9" id="DDc-M9-Zwj"/>
+                        <outlet property="taskname" destination="2Ij-hJ-fQY" id="SoW-gT-qkk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rXr-l9-I4e" userLabel="First Responder" sceneMemberID="firstResponder"/>

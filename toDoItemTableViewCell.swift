@@ -21,6 +21,7 @@ class toDoItemTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+  
     @IBOutlet weak var priorityImageView: UIImageView!
     
     
@@ -33,7 +34,8 @@ class toDoItemTableViewCell: UITableViewCell {
     @IBOutlet weak var taskDuration: UITextField!
     
     
-    @IBOutlet weak var TaskState: UITextField!
+
+    @IBOutlet weak var task_status_image_view: UIImageView!
     
     
     

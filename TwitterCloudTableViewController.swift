@@ -234,28 +234,86 @@ class TwitterCloudTableViewController: UITableViewController {
         }
         
        let message = messages[indexPath.section]
+        
+        
+        
     
         
-       if let messageContent = message["content"]        {
-            let dateFormat =  DateFormatter()
-            dateFormat.dateFormat = "MM/dd/yyyy hh-mm-ss"
-            let dateString = dateFormat.string(from: message.creationDate!)
-        
-            cell.taskDate.text = dateString
-            cell.taskDate.textAlignment = .left
-            cell.taskDate.borderStyle = .none
-            cell.TaskTitle.text = messageContent as! String
+       if let taskname = message[ToDoItem.taskname]{
+
+            cell.TaskTitle.text = taskname as! String
             cell.TaskTitle.textAlignment = .center
             cell.TaskTitle.isUserInteractionEnabled = false
-            cell.priorityImageView.image = UIImage(named: "tomato.jpg")
-           // cell.priorityImageView.sizeToFit()
+
 
        }
         
-    //  let priority = message["priority"] as! Int
-    
-      //  print("the priority is \(priority)")
-      
+       if let taskdate = message[ToDoItem.taskDate]
+       {
+            cell.taskDate.textAlignment = .left
+            cell.taskDate.borderStyle = .none
+            cell.taskDate.text = taskdate as! String
+       }
+        
+       if let taskpriority = message[ToDoItem.taskpriority]
+       {
+            var taskpriority_type : Int?
+            taskpriority_type = taskpriority as! Int
+            print("the task priority is \(taskpriority)")
+        
+            if taskpriority_type == 1
+            {
+                cell.priorityImageView.image =   #imageLiteral(resourceName: "high_priority")//UIImage(named: )
+                cell.priorityImageView.sizeToFit()
+            }
+            else if taskpriority_type == 2
+            {
+                cell.priorityImageView.image = #imageLiteral(resourceName: "middle_priority")//UIImage(named: #imageLiteral(resourceName: "middle_priority"))
+                cell.priorityImageView.sizeToFit()
+        
+            }
+            else if taskpriority_type == 3
+            {
+                cell.priorityImageView.image = #imageLiteral(resourceName: "low_priority")//UIImage(named: #imageLiteral(resourceName: "low_priority"))
+                cell.priorityImageView.sizeToFit()
+        
+            }
+            else
+            {
+                cell.priorityImageView.image = #imageLiteral(resourceName: "low_priority")//UIImage(named: #imageLiteral(resourceName: "low_priority"))
+                cell.priorityImageView.sizeToFit()
+        
+            }
+
+       }
+      if let task_status = message[ToDoItem.taskstatus]
+      {
+        
+        var status : Int = task_status as! Int
+            if status == 1
+            {
+                cell.task_status_image_view.image = #imageLiteral(resourceName: "finished")
+            }
+            else if status == 2
+            {
+               cell.task_status_image_view.image = #imageLiteral(resourceName: "Not_finished")
+            }
+            else
+            {
+                cell.task_status_image_view.image = #imageLiteral(resourceName: "Not_finished")
+            }
+        
+        
+      }
+
+      if let taskDuration = message[ToDoItem.taskduration]
+      {
+            cell.taskDuration.text = String(describing: taskDuration)  + " Mins"
+            cell.taskDuration.textAlignment = .left
+            cell.taskDuration.borderStyle = .none
+            print("the task duration is \(taskDuration)")
+      }
+        
 
       return cell
     }
@@ -286,11 +344,22 @@ class TwitterCloudTableViewController: UITableViewController {
         
         if segue.identifier == "todoListItem"
         {
-           // let message = self.messages[(indexpath?.section)!]
+            let message = self.messages[(indexpath?.section)!]
             let tdvc = (segue.destination as! UINavigationController).visibleViewController as! ToDoItemViewController
+            if let tasknames = message[ToDoItem.taskname]
+            {
+                tdvc.task_name = tasknames as? String
+            }
+            if let taskcontent = message[ToDoItem.taskcontent]
+            {
+                tdvc.task_content = taskcontent as? String
+            }
+            
             tdvc.savetype = 1
             print("the record type is \(tdvc.savetype)")
             tdvc.recordID = self.messages[(indexpath?.section)!].recordID
+            
+
            // tdvc.todoitemName = message["content"] as! String?
             
         
